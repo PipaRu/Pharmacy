@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Аптека</string>
+
+    <string name="navigation_basket">Корзина</string>
+    <string name="navigation_showcase">Витрина</string>
+    <string name="navigation_profile">Профиль</string>
+
+    <string name="ok">Хорошо</string>
+    <string name="delete">Удалить</string>
+    <string name="back">Назад</string>
+    <string name="save">Сохранить</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="cancel">Отмена</string>
+
+    <string name="order_status_undefined">Неизвестно</string>
+    <string name="order_status_created">Создан</string>
+    <string name="order_status_progress">Выполняется</string>
+    <string name="order_status_completed">Завершен</string>
+    <string name="order_status_cancelled">Отменен</string>
+    <string name="order_status_failed">Неудача</string>
+
+    <string name="content_basket_search_placeholder">Поиск</string>
+    <string name="content_basket_action_buy">Купить</string>
+    <string name="content_basket_action_buy_empty">Выберете продукты</string>
+    <string name="content_basket_message_empty">Ваша корзина пуста.\nВы можете добавить товары из каталога</string>
+
+    <string name="content_showcase_description_filter">Фильтр</string>
+    <string name="content_showcase_text_search_placeholder">Поиск</string>
+    <string name="content_showcase_description_product_image">Изображение</string>
+    <string name="content_showcase_action_product_add_to_basket">В корзину</string>
+    <string name="content_showcase_action_product_remove_from_basket">Удалить</string>
+    <string name="content_showcase_loading_items_message_error">Ошибка загрузки</string>
+    <string name="content_showcase_loading_items_action_try_again">Повтор</string>
+    <string name="content_showcase_loading_message_error">Ошибка получения данных</string>
+    <string name="content_showcase_loading_action_try_again">Повтор</string>
+
+    <string name="content_profile_admin_menu_title">Администрирование</string>
+    <string name="content_profile_admin_menu_action_back">Назад</string>
+    <string name="content_profile_admin_menu_action_products">Продукты</string>
+    <string name="content_profile_admin_menu_action_reports">Отчеты</string>
+
+    <string name="content_profile_admin_product_details_label_product_image">Изображение</string>
+    <string name="content_profile_admin_product_details_label_product_name">Название</string>
+    <string name="content_profile_admin_product_details_label_product_description">Описание</string>
+    <string name="content_profile_admin_product_details_label_product_price">Цена</string>
+    <string name="content_profile_admin_product_details_label_product_discount">Скидка</string>
+    <string name="content_profile_admin_product_details_action_back">@string/back</string>
+    <string name="content_profile_admin_product_details_action_save">@string/save</string>
+    <string name="content_profile_admin_product_details_action_delete">@string/delete</string>
+
+    <string name="content_profile_admin_product_details_dialog_delete_warning_message">Удалить продукт?</string>
+    <string name="content_profile_admin_product_details_dialog_delete_warning_action_positive">@string/yes</string>
+    <string name="content_profile_admin_product_details_dialog_delete_warning_action_negative">@string/cancel</string>
+
+    <string name="content_profile_admin_products_text_search_placeholder">Поиск</string>
+    <string name="content_profile_admin_products_description_product_image">Изображение</string>
+    <string name="content_profile_admin_products_action_back">@string/back</string>
+    <string name="content_profile_admin_products_action_enable_selection_mode">Включить</string>
+    <string name="content_profile_admin_products_action_disable_selection_mode">Выключить</string>
+    <string name="content_profile_admin_products_action_delete_all_selected">Удалить выбранные</string>
+
+    <string name="content_profile_admin_products_dialog_delete_warning_message">Удалить выбранные продукты?</string>
+    <string name="content_profile_admin_products_dialog_delete_warning_action_positive">@string/yes</string>
+    <string name="content_profile_admin_products_dialog_delete_warning_action_negative">@string/cancel</string>
+
+
+    <string name="content_address_picker_input_label">Введите адрес доставки</string>
+    <string name="content_address_picker_message_items_empty">Ничего не найдено :(</string>
+
+    <string name="content_authorization_required_message">Для совершения операции необходимо авторизоваться в приложении</string>
+    <string name="content_authorization_required_action">Для совершения операции необходимо авторизоваться в приложении</string>
+
+    <string name="content_in_developing_message">Данный раздел находится в разработке</string>
+    <string name="content_in_developing_action">Хорошо</string>
+
+    <string name="content_something_went_wrong_message">Упс, что-то пошло не так :(\nМы уже прилагаем все усилия что-бы это исправить</string>
+    <string name="content_something_went_wrong_action">Хорошо</string>
+
+    <string name="content_checkout_title">Оформление заказа</string>
+    <string name="content_checkout_action">Оформить</string>
+    <string name="content_checkout_address_label">Адрес доставки:</string>
+    <string name="content_checkout_address_action_change">Изменить адрес</string>
+    <string name="content_checkout_address_require_message">Для оформления заказа необходимо указать адрес доставки</string>
+    <string name="content_checkout_address_require_action">Выбрать адрес доставки</string>
+    <string name="content_checkout_unauthorized_message">Для оформления заказа необходимо авторизоваться</string>
+    <string name="content_checkout_unauthorized_action">Авторизоваться</string>
+    <string name="content_checkout_completed_message">Заказ №%s успешно оформлен</string>
+    <string name="content_checkout_summary_title">Ваш заказ</string>
+    <string name="content_checkout_summary_price">Цена</string>
+    <string name="content_checkout_summary_discount">Скидка</string>
+    <string name="content_checkout_summary_total">Итого</string>
+    <string name="content_checkout_completed_action">Хорошо</string>
+
+    <string name="content_orders_title">Заказы</string>
+    <string name="content_orders_message_empty">Нет заказов</string>
+    <string name="content_orders_message_error">Ошибка</string>
+    <string name="content_orders_action_try_again">Повтор</string>
+    <string name="content_orders_item_placeholder">Заказ #%s</string>
+    <string name="content_orders_cancel_order_message">Вы уверены что хотите отменить заказ #%s?</string>
+    <string name="content_orders_cancel_order_action_positive">Да</string>
+    <string name="content_orders_cancel_order_action_negative">Нет</string>
+
+    <string name="content_profile_title">Профиль</string>
+    <string name="content_profile_address_label">Адрес доставки:</string>
+    <string name="content_profile_address_message_not_selected">Адрес доставки не указан</string>
+    <string name="content_profile_address_action_select">Выбрать адрес</string>
+    <string name="content_profile_address_action_change">Изменить</string>
+    <string name="content_profile_address_action_delete">Удалить</string>
+    <string name="content_profile_authorized_item_favorites">Избранное</string>
+    <string name="content_profile_authorized_item_orders">Заказы</string>
+    <string name="content_profile_authorized_item_settings">Настройка</string>
+    <string name="content_profile_authorized_item_admin">Администрирование</string>
+    <string name="content_profile_unauthorized_name_placeholder">Имя</string>
+    <string name="content_profile_unauthorized_action_login">Войти</string>
+    <string name="content_profile_unauthorized_phone_placeholder">Номер телефона</string>
+
+</resources>

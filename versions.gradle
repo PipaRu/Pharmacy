@@ -1,0 +1,65 @@
+ext.versions = [
+        "kotlin"                     : "1.7.10",
+        "kotlinx_coroutines"         : "1.6.4",
+        "kotlinx_serialization_json" : "1.4.0",
+        "core"                       : "1.9.0",
+        "compose"                    : "1.2.1",
+        "appcompat"                  : "1.5.1",
+        "material"                   : "1.6.1",
+        "constraintlayout"           : "2.1.4",
+        "constraintlayout_compose"   : "1.0.1",
+        "recyclerview"               : "1.2.1",
+        "activity"                   : "1.6.0",
+        "fragment"                   : "1.5.3",
+        "navigation"                 : "2.5.2",
+        "lifecycle"                  : "2.5.1",
+        "room"                       : "2.4.3",
+        "paging"                     : "3.1.1",
+        "paging_compose"             : "1.0.0-alpha16",
+        "koin"                       : "3.2.2",
+        "koin_compose"               : "3.2.1",
+        "coil"                       : "2.2.1",
+        "retrofit"                   : "2.9.0",
+        "okhttp3"                    : "4.9.3",
+        "timber"                     : "5.0.1",
+        "viewbindingpropertydelegate": "1.5.6",
+        "orbit"                      : "4.3.2",
+        "adapterdelegate"            : "4.3.2",
+        "junit"                      : "4.13.2",
+        "android_junit"              : "1.1.3",
+        "android_espresso"           : "3.4.0",
+        "gradle"                     : "7.2.2"
+]
+
+ext {
+    gradle_version = "$versions.gradle"
+    kotlin_version = "$versions.kotlin"
+    navigation_version = "$versions.navigation"
+}
+
+ext.getAppVersionCode = { ->
+    try {
+        def code = new ByteArrayOutputStream()
+        exec {
+            commandLine 'git', 'rev-list', '--count', 'HEAD'
+            standardOutput = code
+        }
+        def c = Integer.parseInt(code.toString().replace("\n", ""))
+        if (c == 0) return 1
+        else return c
+    }
+    catch (ignored) {
+        return 1
+    }
+}
+
+ext.appVersion = [
+        "code": getAppVersionCode(),
+        "name": "0.1.0",
+]
+
+ext.sdkVersions = [
+        "compileSdk": 33,
+        "minSdk"    : 24,
+        "targetSdk" : 33
+]

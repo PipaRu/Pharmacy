@@ -1,0 +1,115 @@
+<resources>
+    <string name="app_name">Pharmacy</string>
+
+    <string name="navigation_basket">Basket</string>
+    <string name="navigation_showcase">Showcase</string>
+    <string name="navigation_profile">Profile</string>
+
+    <string name="ok">OK</string>
+    <string name="delete">Delete</string>
+    <string name="back">Back</string>
+    <string name="save">Save</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="order_status_undefined">Undefined</string>
+    <string name="order_status_created">Created</string>
+    <string name="order_status_progress">Progress</string>
+    <string name="order_status_completed">Completed</string>
+    <string name="order_status_cancelled">Cancelled</string>
+    <string name="order_status_failed">Failed</string>
+
+    <string name="content_basket_search_placeholder">Search</string>
+    <string name="content_basket_action_buy">Buy</string>
+    <string name="content_basket_action_buy_empty">Select any products</string>
+    <string name="content_basket_message_empty">Your basket is empty.\nYou can add products from the catalog</string>
+
+    <string name="content_showcase_description_filter">Filter</string>
+    <string name="content_showcase_text_search_placeholder">Search</string>
+    <string name="content_showcase_description_product_image">Image</string>
+    <string name="content_showcase_action_product_add_to_basket">Add</string>
+    <string name="content_showcase_action_product_remove_from_basket">Remove</string>
+    <string name="content_showcase_loading_items_message_error">Loading error</string>
+    <string name="content_showcase_loading_items_action_try_again">Retry</string>
+    <string name="content_showcase_loading_message_error">Loading content error</string>
+    <string name="content_showcase_loading_action_try_again">Retry</string>
+
+    <string name="content_profile_admin_menu_title">Administration</string>
+    <string name="content_profile_admin_menu_action_back">Back</string>
+    <string name="content_profile_admin_menu_action_products">Products</string>
+    <string name="content_profile_admin_menu_action_reports">Reports</string>
+
+    <string name="content_profile_admin_products_text_search_placeholder">Search</string>
+    <string name="content_profile_admin_products_description_product_image">Image</string>
+    <string name="content_profile_admin_products_action_back">@string/back</string>
+    <string name="content_profile_admin_products_action_enable_selection_mode">Enable selection mode</string>
+    <string name="content_profile_admin_products_action_disable_selection_mode">Disable selection mode</string>
+    <string name="content_profile_admin_products_action_delete_all_selected">Delete all selected</string>
+    <string name="content_profile_admin_products_dialog_delete_warning_message">Delete all selected products?</string>
+    <string name="content_profile_admin_products_dialog_delete_warning_action_positive">@string/yes</string>
+    <string name="content_profile_admin_products_dialog_delete_warning_action_negative">@string/cancel</string>
+
+    <string name="content_profile_admin_product_details_label_product_image">Image</string>
+    <string name="content_profile_admin_product_details_label_product_name">Name</string>
+    <string name="content_profile_admin_product_details_label_product_description">Description</string>
+    <string name="content_profile_admin_product_details_label_product_price">Price</string>
+    <string name="content_profile_admin_product_details_label_product_discount">Discount</string>
+    <string name="content_profile_admin_product_details_action_back">@string/back</string>
+    <string name="content_profile_admin_product_details_action_save">@string/save</string>
+    <string name="content_profile_admin_product_details_action_delete">@string/delete</string>
+    <string name="content_profile_admin_product_details_dialog_delete_warning_message">Delete product?</string>
+    <string name="content_profile_admin_product_details_dialog_delete_warning_action_positive">@string/yes</string>
+    <string name="content_profile_admin_product_details_dialog_delete_warning_action_negative">@string/cancel</string>
+
+    <string name="content_address_picker_input_label">Enter shipping address</string>
+    <string name="content_address_picker_message_items_empty">Nothing found :(</string>
+
+    <string name="content_authorization_required_message">To complete the operation, you must log in to the application</string>
+    <string name="content_authorization_required_action">To complete the operation, you must log in to the application</string>
+
+    <string name="content_in_developing_message">This section is under development</string>
+    <string name="content_in_developing_action">@string/ok</string>
+
+    <string name="content_something_went_wrong_message">Oops, something went wrong :(\nWe are already working hard to fix it</string>
+    <string name="content_something_went_wrong_action">@string/ok</string>
+
+    <string name="content_checkout_title">Checkouting</string>
+    <string name="content_checkout_action">Checkout</string>
+    <string name="content_checkout_address_label">Delivery address::</string>
+    <string name="content_checkout_address_action_change">Change address</string>
+    <string name="content_checkout_address_require_message">To place an order, you must provide a delivery address.</string>
+    <string name="content_checkout_address_require_action">Select delivery address</string>
+    <string name="content_checkout_unauthorized_message">You must be logged in to place an order.</string>
+    <string name="content_checkout_unauthorized_action">Login</string>
+    <string name="content_checkout_completed_message">Order #%s completed successfully</string>
+    <string name="content_checkout_summary_title">Your order</string>
+    <string name="content_checkout_summary_price">Price</string>
+    <string name="content_checkout_summary_discount">Discount</string>
+    <string name="content_checkout_summary_total">Total</string>
+    <string name="content_checkout_completed_action">@string/ok</string>
+
+    <string name="content_orders_title">Orders</string>
+    <string name="content_orders_message_empty">No orders</string>
+    <string name="content_orders_message_error">Error</string>
+    <string name="content_orders_action_try_again">Retry</string>
+    <string name="content_orders_item_placeholder">Order #%s</string>
+    <string name="content_orders_cancel_order_message">Are you sure you want to cancel order #%c?</string>
+    <string name="content_orders_cancel_order_action_positive">@string/yes</string>
+    <string name="content_orders_cancel_order_action_negative">@string/no</string>
+
+    <string name="content_profile_title">Profile</string>
+    <string name="content_profile_address_label">Delivery address:</string>
+    <string name="content_profile_address_message_not_selected">Delivery address not specified</string>
+    <string name="content_profile_address_action_select">Choose an address</string>
+    <string name="content_profile_address_action_change">Change</string>
+    <string name="content_profile_address_action_delete">Delete</string>
+    <string name="content_profile_authorized_item_favorites">Favorites</string>
+    <string name="content_profile_authorized_item_orders">Orders</string>
+    <string name="content_profile_authorized_item_settings">Setting</string>
+    <string name="content_profile_authorized_item_admin">Administration</string>
+    <string name="content_profile_unauthorized_name_placeholder">Name</string>
+    <string name="content_profile_unauthorized_action_login">Login</string>
+    <string name="content_profile_unauthorized_phone_placeholder">Phone number</string>
+
+</resources>

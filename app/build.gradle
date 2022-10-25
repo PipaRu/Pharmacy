@@ -1,0 +1,150 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlinx-serialization'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+    id 'androidx.navigation.safeargs.kotlin'
+}
+
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
+android {
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties.getProperty('storeFile', 'release.keystore'))
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+
+    compileSdk sdkVersions.compileSdk
+
+    defaultConfig {
+        applicationId "com.pharmacy"
+        minSdk sdkVersions.minSdk
+        targetSdk sdkVersions.targetSdk
+        versionCode appVersion.code
+        versionName appVersion.name
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        setProperty("archivesBaseName", "pharmacy-$versionName($versionCode)")
+    }
+
+    buildTypes {
+        release {
+            debuggable = false
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            debuggable = true
+            minifyEnabled false
+            shrinkResources false
+            versionNameSuffix '(' + appVersion.code + ')-debug'
+            signingConfig signingConfigs.debug
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.3.1"
+    }
+}
+
+dependencies {
+
+    implementation "androidx.core:core-ktx:$versions.core"
+
+    implementation "androidx.appcompat:appcompat:$versions.appcompat"
+
+    implementation "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
+    implementation "androidx.constraintlayout:constraintlayout-compose:$versions.constraintlayout_compose"
+
+    implementation "androidx.activity:activity-ktx:$versions.activity"
+    implementation "androidx.activity:activity-compose:$versions.activity"
+
+    implementation "androidx.fragment:fragment-ktx:$versions.fragment"
+    debugImplementation "androidx.fragment:fragment-testing:$versions.fragment"
+
+    implementation "androidx.recyclerview:recyclerview:$versions.recyclerview"
+
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$versions.lifecycle"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$versions.lifecycle"
+    implementation "androidx.lifecycle:lifecycle-process:$versions.lifecycle"
+
+    implementation "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$versions.navigation"
+    implementation "androidx.navigation:navigation-compose:$versions.navigation"
+    androidTestImplementation "androidx.navigation:navigation-testing:$versions.navigation"
+
+    implementation "androidx.compose.ui:ui:$versions.compose"
+    implementation "androidx.compose.ui:ui-tooling:$versions.compose"
+    implementation "androidx.compose.foundation:foundation:$versions.compose"
+    implementation "androidx.compose.material:material:$versions.compose"
+    implementation "androidx.compose.material:material-icons-core:$versions.compose"
+    implementation "androidx.compose.material:material-icons-extended:$versions.compose"
+
+    implementation "androidx.room:room-runtime:$versions.room"
+    implementation "androidx.room:room-ktx:$versions.room"
+    implementation "androidx.room:room-paging:$versions.room" //2.5.0-alpha03
+    testImplementation "androidx.room:room-testing:$versions.room"
+    kapt "androidx.room:room-compiler:$versions.room"
+
+    implementation "io.insert-koin:koin-android:$versions.koin"
+    implementation "io.insert-koin:koin-androidx-navigation:$versions.koin"
+    implementation "io.insert-koin:koin-androidx-compose:$versions.koin_compose"
+    testImplementation "io.insert-koin:koin-test:$versions.koin"
+    testImplementation "io.insert-koin:koin-test-junit4:$versions.koin"
+
+    implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:$versions.adapterdelegate"
+    implementation "com.hannesdorfmann:adapterdelegates4-pagination:$versions.adapterdelegate"
+
+    implementation "io.coil-kt:coil:$versions.coil"
+    implementation "io.coil-kt:coil-compose:$versions.coil"
+
+    implementation "com.github.kirich1409:viewbindingpropertydelegate-noreflection:$versions.viewbindingpropertydelegate"
+
+    implementation "org.orbit-mvi:orbit-viewmodel:$versions.orbit"
+    implementation "org.orbit-mvi:orbit-compose:$versions.orbit"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.kotlinx_coroutines"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.kotlinx_coroutines"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$versions.kotlinx_serialization_json"
+
+    implementation "com.google.android.material:material:$versions.material"
+
+    implementation 'com.valentinilk.shimmer:compose-shimmer:1.0.3'
+
+    implementation "androidx.paging:paging-runtime:$versions.paging"
+    implementation "androidx.paging:paging-compose:$versions.paging_compose"
+
+    implementation "com.jakewharton.timber:timber:$versions.timber"
+
+    implementation "com.airbnb.android:lottie-compose:5.2.0"
+
+    testImplementation "junit:junit:$versions.junit"
+    androidTestImplementation "androidx.test.ext:junit:$versions.android_junit"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$versions.android_espresso"
+
+}

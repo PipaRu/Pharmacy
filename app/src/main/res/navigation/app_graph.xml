@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/app_graph"
+    app:startDestination="@id/showcase_graph">
+
+    <include app:graph="@navigation/basket_graph" />
+
+    <include app:graph="@navigation/profile_graph" />
+
+    <include app:graph="@navigation/showcase_graph" />
+
+    <dialog
+        android:id="@+id/authorizationRequiredDialog"
+        android:name="com.pharmacy.ui.dialog.authorization_required.AuthorizationRequiredDialog"
+        android:label="AuthorizationRequiredDialog" />
+
+    <dialog
+        android:id="@+id/addressPickerDialog"
+        android:name="com.pharmacy.ui.dialog.address_picker.AddressPickerDialog"
+        android:label="AddressPickerDialog">
+        <argument
+            android:name="type"
+            app:argType="string"/>
+    </dialog>
+
+    <dialog
+        android:id="@+id/dialogCompose"
+        android:name="com.pharmacy.ui.dialog.composable.DialogCompose"
+        android:label="DialogCompose" >
+        <argument
+            android:name="builder"
+            app:argType="com.pharmacy.ui.dialog.composable.ComposableDialogBuilder" />
+    </dialog>
+
+    <action
+        android:id="@+id/action_composable_dialog"
+        app:destination="@id/dialogCompose"/>
+
+</navigation>

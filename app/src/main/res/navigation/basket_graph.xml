@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/basket_graph"
+    app:startDestination="@id/basketFragment">
+
+    <fragment
+        android:id="@+id/basketFragment"
+        android:name="com.pharmacy.ui.screen.basket.BasketFragment"
+        android:label="@string/navigation_basket"
+        tools:layout="@layout/fragment_basket">
+
+        <action
+            android:id="@+id/action_basketFragment_to_checkoutFragment"
+            app:destination="@id/checkoutFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="com.pharmacy.ui.screen.checkout.CheckoutFragment"
+        android:label="CheckoutFragment"
+        tools:layout="@layout/fragment_checkout">
+
+        <argument
+            android:name="products"
+            app:argType="com.pharmacy.ui.model.BasketBunchItem[]" />
+
+    </fragment>
+
+</navigation>
