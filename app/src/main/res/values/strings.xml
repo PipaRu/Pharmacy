@@ -66,7 +66,7 @@
     <string name="content_address_picker_message_items_empty">Nothing found :(</string>
 
     <string name="content_authorization_required_message">To complete the operation, you must log in to the application</string>
-    <string name="content_authorization_required_action">To complete the operation, you must log in to the application</string>
+    <string name="content_authorization_required_action">Authorization</string>
 
     <string name="content_in_developing_message">This section is under development</string>
     <string name="content_in_developing_action">@string/ok</string>

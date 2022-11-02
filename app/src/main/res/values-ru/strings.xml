@@ -71,7 +71,7 @@
     <string name="content_address_picker_message_items_empty">Ничего не найдено :(</string>
 
     <string name="content_authorization_required_message">Для совершения операции необходимо авторизоваться в приложении</string>
-    <string name="content_authorization_required_action">Для совершения операции необходимо авторизоваться в приложении</string>
+    <string name="content_authorization_required_action">Авторизоваться</string>
 
     <string name="content_in_developing_message">Данный раздел находится в разработке</string>
     <string name="content_in_developing_action">Хорошо</string>

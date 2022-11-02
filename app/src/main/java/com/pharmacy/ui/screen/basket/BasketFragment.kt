@@ -2,11 +2,13 @@ package com.pharmacy.ui.screen.basket
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.pharmacy.AppGraphDirections
 import com.pharmacy.R
 import com.pharmacy.common.ui.fragment.AppFragment
+import com.pharmacy.common.ui.fragment.result.launcher.registerForFragmentResult
 import com.pharmacy.databinding.FragmentBasketBinding
 import com.pharmacy.ui.dialog.authorization_required.AuthorizationRequiredDialog
 import com.pharmacy.ui.dialog.in_developing.InDevelopingDialogContent
@@ -20,13 +22,14 @@ import org.orbitmvi.orbit.viewmodel.observe
 
 class BasketFragment : AppFragment(R.layout.fragment_basket) {
 
+    private val authorizationRequiredDialog = registerForFragmentResult(
+        fragmentResult = AuthorizationRequiredDialog,
+        launch = { showAuthorizationRequiredDialog() },
+        listener = { navigateToProfile() }
+    )
+
     private val viewModel by stateViewModel<BasketViewModel>()
     private val viewBinding by viewBinding(FragmentBasketBinding::bind)
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        AuthorizationRequiredDialog.setResultListener { navigateToProfile() }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,7 +44,7 @@ class BasketFragment : AppFragment(R.layout.fragment_basket) {
     private fun handleSideEffect(effect: BasketSideEffect) = when (effect) {
         is BasketSideEffect.ShowContentInDeveloping -> showContentInDeveloping(effect.contentName)
         is BasketSideEffect.ShowSomethingWentWrong -> showSomethingWentWrong(effect.target)
-        is BasketSideEffect.ShowAuthorizationRequired -> showAuthorizationRequiredDialog()
+        is BasketSideEffect.ShowAuthorizationRequired -> authorizationRequiredDialog.launch()
         is BasketSideEffect.ShowCheckout -> showCheckout(effect.products)
     }
 
