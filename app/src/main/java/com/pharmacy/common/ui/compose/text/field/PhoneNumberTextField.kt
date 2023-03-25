@@ -1,11 +1,16 @@
+@file:OptIn(ExperimentalComposeUiApi::class)
+
 package com.pharmacy.common.ui.compose.text.field
 
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.core.text.isDigitsOnly
 import com.pharmacy.common.formatter.PhoneFormatter
@@ -16,7 +21,9 @@ fun PhoneNumberTextField(
     label: String,
     number: String,
     enabled: Boolean = true,
-    onPhoneChanged: (String) -> Unit
+    onPhoneChanged: (String) -> Unit,
+    imeAction: ImeAction = ImeAction.Done,
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
 ) {
     OutlinedTextField(
         modifier = modifier,
@@ -37,6 +44,7 @@ fun PhoneNumberTextField(
             )
         },
         visualTransformation = VisualTransformations.phoneNumber,
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone, imeAction = imeAction),
+        keyboardActions = keyboardActions,
     )
 }

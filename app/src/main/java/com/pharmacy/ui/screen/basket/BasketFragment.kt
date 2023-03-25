@@ -2,7 +2,6 @@ package com.pharmacy.ui.screen.basket
 
 import android.os.Bundle
 import android.view.View
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.pharmacy.AppGraphDirections
@@ -25,7 +24,7 @@ class BasketFragment : AppFragment(R.layout.fragment_basket) {
     private val authorizationRequiredDialog = registerForFragmentResult(
         fragmentResult = AuthorizationRequiredDialog,
         launch = { showAuthorizationRequiredDialog() },
-        listener = { navigateToProfile() }
+        listener = {  }
     )
 
     private val viewModel by stateViewModel<BasketViewModel>()
@@ -65,10 +64,6 @@ class BasketFragment : AppFragment(R.layout.fragment_basket) {
     private fun showCheckout(products: List<BasketBunchItem>) {
         val args = CheckoutFragmentArgs(products.toTypedArray()).toBundle()
         findNavController().navigate(R.id.checkoutFragment, args)
-    }
-
-    private fun navigateToProfile() {
-        findNavController().navigate(R.id.profile_graph)
     }
 
 }

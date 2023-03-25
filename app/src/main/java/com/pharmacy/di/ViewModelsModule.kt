@@ -1,6 +1,7 @@
 package com.pharmacy.di
 
 import com.pharmacy.ui.dialog.address_picker.AddressPickerViewModel
+import com.pharmacy.ui.dialog.authorization_required.AuthorizationRequiredDialogViewModel
 import com.pharmacy.ui.screen.admin_product_details.AdminProductDetailsViewModel
 import com.pharmacy.ui.screen.admin_products.AdminProductsViewModel
 import com.pharmacy.ui.screen.basket.BasketViewModel
@@ -76,6 +77,13 @@ val viewModelsModule = module {
     viewModel { parameters ->
         OrdersViewModel(
             ordersRepository = get(),
+            savedStateHandle = parameters.get(),
+        )
+    }
+
+    viewModel { parameters ->
+        AuthorizationRequiredDialogViewModel(
+            authRepository = get(),
             savedStateHandle = parameters.get(),
         )
     }
