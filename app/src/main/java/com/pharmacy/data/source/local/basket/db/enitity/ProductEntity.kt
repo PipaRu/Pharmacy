@@ -19,8 +19,8 @@ data class ProductEntity(
     val imageUrl: String,
     @ColumnInfo(name = "description")
     val description: String,
-    @ColumnInfo(name = "category")
-    val category: String,
+    @ColumnInfo(name = "categories")
+    val categories: List<CategoryEntity>,
     @Embedded(prefix = "price_")
     val price: PriceEntity,
 ) : ModelConverter<ProductEntity, Product> by ProductEntityToProductConverter {

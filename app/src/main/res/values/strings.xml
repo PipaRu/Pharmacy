@@ -12,6 +12,9 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="cancel">Cancel</string>
+    <string name="search">Search</string>
+
+    <string name="category">Category</string>
 
     <string name="order_status_undefined">Undefined</string>
     <string name="order_status_created">Created</string>
@@ -39,6 +42,34 @@
     <string name="content_profile_admin_menu_action_back">Back</string>
     <string name="content_profile_admin_menu_action_products">Products</string>
     <string name="content_profile_admin_menu_action_reports">Reports</string>
+
+    <string name="content_profile_admin_reports_menu_title">Reports</string>
+    <string name="content_profile_admin_reports_menu_action_back">Back</string>
+    <string name="content_profile_admin_reports_menu_action_users">Users</string>
+    <string name="content_profile_admin_reports_menu_action_product_categories">Product Categories</string>
+    <string name="content_profile_admin_reports_menu_action_products">Products</string>
+
+    <string name="content_profile_admin_reports_users_title">User Report</string>
+    <string name="content_profile_admin_reports_users_action_back">Back</string>
+    <string name="content_profile_admin_reports_users_total">Number of users</string>
+    <string name="content_profile_admin_reports_users_active_total">Number of active users</string>
+    <string name="content_profile_admin_reports_users_new_in_week">Number of new users per week</string>
+    <string name="content_profile_admin_reports_users_orders_total">The number of orders</string>
+    <string name="content_profile_admin_reports_users_orders_new_in_week">Number of orders per week</string>
+    <string name="content_profile_admin_reports_users_average_order_price">Average order value</string>
+
+    <string name="content_profile_admin_reports_categories_title">Categories Report</string>
+    <string name="content_profile_admin_reports_categories_action_back">Back</string>
+    <string name="content_profile_admin_reports_categories_statistic_product_count">Number of products</string>
+    <string name="content_profile_admin_reports_categories_statistic_orders_count">The number of orders</string>
+    <string name="content_profile_admin_reports_categories_statistic_orders_count_in_week">Number of orders per week</string>
+    <string name="content_profile_admin_reports_categories_statistic_profit">Total profit</string>
+
+    <string name="content_profile_admin_reports_products_title">Products Report</string>
+    <string name="content_profile_admin_reports_products_action_back">Back</string>
+    <string name="content_profile_admin_reports_products_statistic_orders_count">The number of orders</string>
+    <string name="content_profile_admin_reports_products_statistic_orders_count_in_week">Number of orders per week</string>
+    <string name="content_profile_admin_reports_products_statistic_totla_profit">Total profit</string>
 
     <string name="content_profile_admin_products_text_search_placeholder">Search</string>
     <string name="content_profile_admin_products_description_product_image">Image</string>

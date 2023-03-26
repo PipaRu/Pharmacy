@@ -1,9 +1,9 @@
 package com.pharmacy.data.model
 
-import com.pharmacy.common.extensions.emptyString
-
 data class ProductFilter(
-    val query: String = emptyString(),
+    val query: String? = null,
+    val priceRange: IntRange? = null,
+    val categories: List<Category>? = null,
 ) {
     companion object {
         val Empty: ProductFilter = ProductFilter()

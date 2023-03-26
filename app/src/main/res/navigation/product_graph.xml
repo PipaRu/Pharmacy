@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/product_graph">
+
+    <fragment
+        android:id="@+id/productDetailsFragment"
+        android:name="com.pharmacy.ui.screen.product_details.ProductDetailsFragment"
+        android:label="ProductDetailsFragment">
+
+        <argument
+            android:name="productId"
+            app:argType="integer" />
+
+        <deepLink
+            android:id="@+id/deepLink"
+            app:action="ACTION_VIEW"
+            app:uri="https://pharmacy/product/{productId}" />
+
+    </fragment>
+
+</navigation>

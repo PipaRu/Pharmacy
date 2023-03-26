@@ -4,5 +4,6 @@ sealed class AdminMenuSideEffect {
     data class ShowContentInDeveloping(val contentName: String? = null) : AdminMenuSideEffect()
     data class ShowSomethingWentWrong(val target: String? = null) : AdminMenuSideEffect()
     object NavigateToProducts : AdminMenuSideEffect()
+    object NavigateToReports : AdminMenuSideEffect()
     object NavigateBack : AdminMenuSideEffect()
 }

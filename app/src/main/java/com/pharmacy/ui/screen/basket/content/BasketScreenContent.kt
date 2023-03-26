@@ -123,7 +123,7 @@ private fun TopAppBarContent(
     TopAppBar(
         title = {
             OutlinedTextField(
-                modifier = Modifier.height(36.dp),
+                modifier = Modifier.height(36.dp).fillMaxWidth(),
                 value = query,
                 onValueChange = onQueryChanged,
                 placeholder = { Text(text = stringResource(search_placeholder)) },

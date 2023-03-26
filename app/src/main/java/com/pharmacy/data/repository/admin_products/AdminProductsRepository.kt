@@ -12,4 +12,6 @@ interface AdminProductsRepository {
 
     fun deleteProducts(products: Set<Product>): Flow<Unit>
 
+    fun createProduct(): Flow<Product>
+
 }

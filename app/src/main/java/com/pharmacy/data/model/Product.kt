@@ -7,6 +7,6 @@ data class Product(
     val name: String,
     val imageUrl: String,
     val description: String,
-    val category: String,
+    val categories: List<Category>,
     val price: Price,
 ) : Serializable

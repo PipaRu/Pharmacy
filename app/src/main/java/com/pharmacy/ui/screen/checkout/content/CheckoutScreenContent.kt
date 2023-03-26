@@ -442,7 +442,7 @@ private fun CheckoutContentPreview() {
                     name = "Product #1",
                     imageUrl = "Image",
                     description = "Product Description",
-                    category = "Category",
+                    categories = emptyList(),
                     price = PriceItem(
                         finalPrice = 300.0,
                         startPrice = 600.0,
@@ -458,7 +458,7 @@ private fun CheckoutContentPreview() {
                     name = "Product #2",
                     imageUrl = "Image",
                     description = "Product Description",
-                    category = "Category",
+                    categories = emptyList(),
                     price = PriceItem(
                         finalPrice = 1600.0,
                         startPrice = 1600.0,

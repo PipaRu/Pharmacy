@@ -9,6 +9,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.pharmacy.common.converter.model.convert
 import com.pharmacy.common.coroutines.flow.query.QueryFlow
+import com.pharmacy.common.extensions.Empty
 import com.pharmacy.common.extensions.filter
 import com.pharmacy.common.extensions.orZero
 import com.pharmacy.common.extensions.updateElement
@@ -57,7 +58,8 @@ class ShowcaseViewModel(
 
     private val queryFlow: QueryFlow = QueryFlow(
         debounceMilliseconds = QUERY_DEBOUNCE_MILLISECONDS,
-        coroutineScope = viewModelScope
+        coroutineScope = viewModelScope,
+        initialQuery = String.Empty,
     )
 
     private val pager = Pager(
@@ -80,6 +82,12 @@ class ShowcaseViewModel(
     }
 
     init {
+        //Если продукты изменилилсь то рефреш
+        productsRepository.allProducts
+            .onEach { pagingList.refresh() }
+            .flowOn(Dispatchers.Default)
+            .launchIn(viewModelScope)
+
         //Подписываемся на запрос и при обновление рефрешим список
         queryFlow
             .map(::ProductFilter)
@@ -231,7 +239,7 @@ class ShowcaseViewModel(
     }
 
     fun openProductDetails(item: ShowcaseItem.Product) = intent {
-        postSideEffect(ShowcaseSideEffect.ShowContentInDeveloping())
+        postSideEffect(ShowcaseSideEffect.OpenProductDetails(item.item.id))
     }
 
     fun openFilters() = intent {

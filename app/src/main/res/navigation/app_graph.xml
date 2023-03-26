@@ -10,6 +10,8 @@
 
     <include app:graph="@navigation/showcase_graph" />
 
+    <include app:graph="@navigation/product_graph" />
+
     <dialog
         android:id="@+id/authorizationRequiredDialog"
         android:name="com.pharmacy.ui.dialog.authorization_required.AuthorizationRequiredDialog"

@@ -15,4 +15,6 @@ object Formatters {
 
     val quantity: Formatter<Int, String> = QuantityFormatter
 
+    val number: Formatter<Number, String> = NumberFormatter
+
 }

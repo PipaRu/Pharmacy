@@ -15,6 +15,9 @@
     <string name="no">Нет</string>
     <string name="cancel">Отмена</string>
 
+    <string name="category">Категория</string>
+    <string name="search">Поиск</string>
+
     <string name="order_status_undefined">Неизвестно</string>
     <string name="order_status_created">Создан</string>
     <string name="order_status_progress">Выполняется</string>
@@ -41,6 +44,34 @@
     <string name="content_profile_admin_menu_action_back">Назад</string>
     <string name="content_profile_admin_menu_action_products">Продукты</string>
     <string name="content_profile_admin_menu_action_reports">Отчеты</string>
+
+    <string name="content_profile_admin_reports_menu_title">Отчеты</string>
+    <string name="content_profile_admin_reports_menu_action_back">Назад</string>
+    <string name="content_profile_admin_reports_menu_action_users">По пользователям</string>
+    <string name="content_profile_admin_reports_menu_action_product_categories">По категориям</string>
+    <string name="content_profile_admin_reports_menu_action_products">По продукту</string>
+
+    <string name="content_profile_admin_reports_users_title">Отчет по пользователям</string>
+    <string name="content_profile_admin_reports_users_action_back">Назад</string>
+    <string name="content_profile_admin_reports_users_total">Количество пользователей</string>
+    <string name="content_profile_admin_reports_users_active_total">Количество активных пользователей</string>
+    <string name="content_profile_admin_reports_users_new_in_week">Количество новых пользователей за неделю</string>
+    <string name="content_profile_admin_reports_users_orders_total">Количество заказов</string>
+    <string name="content_profile_admin_reports_users_orders_new_in_week">Количество заказов за неделю</string>
+    <string name="content_profile_admin_reports_users_average_order_price">Средняя стоимость заказа</string>
+
+    <string name="content_profile_admin_reports_categories_title">Отчет по категориям</string>
+    <string name="content_profile_admin_reports_categories_action_back">Назад</string>
+    <string name="content_profile_admin_reports_categories_statistic_product_count">Количество продуктов</string>
+    <string name="content_profile_admin_reports_categories_statistic_orders_count">Количество заказов</string>
+    <string name="content_profile_admin_reports_categories_statistic_orders_count_in_week">Количество заказов за неделю</string>
+    <string name="content_profile_admin_reports_categories_statistic_profit">Суммарная прибыль</string>
+
+    <string name="content_profile_admin_reports_products_title">Отчет по продукту</string>
+    <string name="content_profile_admin_reports_products_action_back">Назад</string>
+    <string name="content_profile_admin_reports_products_statistic_orders_count">Количество заказов</string>
+    <string name="content_profile_admin_reports_products_statistic_orders_count_in_week">Количество заказов за неделю</string>
+    <string name="content_profile_admin_reports_products_statistic_totla_profit">Суммарная прибыль</string>
 
     <string name="content_profile_admin_product_details_label_product_image">Изображение</string>
     <string name="content_profile_admin_product_details_label_product_name">Название</string>

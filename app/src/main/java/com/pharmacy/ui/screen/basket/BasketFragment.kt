@@ -2,6 +2,7 @@ package com.pharmacy.ui.screen.basket
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.net.toUri
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.pharmacy.AppGraphDirections
@@ -45,7 +46,13 @@ class BasketFragment : AppFragment(R.layout.fragment_basket) {
         is BasketSideEffect.ShowSomethingWentWrong -> showSomethingWentWrong(effect.target)
         is BasketSideEffect.ShowAuthorizationRequired -> authorizationRequiredDialog.launch()
         is BasketSideEffect.ShowCheckout -> showCheckout(effect.products)
+        is BasketSideEffect.OpenProductDetails -> navigateToProductDetails(effect.productId)
     }
+
+    private fun navigateToProductDetails(productId: Int) {
+        val dir = "https://pharmacy/product/$productId".toUri() // TODO: DeepLinks
+        findNavController().navigate(dir)
+   }
 
     private fun showContentInDeveloping(contentName: String? = null) {
         val dir = AppGraphDirections.actionComposableDialog(InDevelopingDialogContent(contentName))

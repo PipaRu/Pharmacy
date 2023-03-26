@@ -8,4 +8,5 @@ sealed class AdminProductsSideEffect {
     object NavigateBack : AdminProductsSideEffect()
     object ShowDeleteAllSelectedProductsWarning : AdminProductsSideEffect()
     data class NavigateToProductDetails(val productItem: ProductItem) : AdminProductsSideEffect()
+    object NavigateToProductAdding : AdminProductsSideEffect()
 }

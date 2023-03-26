@@ -35,6 +35,7 @@ class AdminMenuFragment : Fragment(R.layout.fragment_admin_menu) {
         is AdminMenuSideEffect.ShowSomethingWentWrong -> showSomethingWentWrongDialog(effect.target)
         is AdminMenuSideEffect.NavigateBack -> navigateBack()
         is AdminMenuSideEffect.NavigateToProducts -> navigateToProducts()
+        is AdminMenuSideEffect.NavigateToReports -> navigateToReports()
     }
 
     private fun navigateBack() {
@@ -43,6 +44,11 @@ class AdminMenuFragment : Fragment(R.layout.fragment_admin_menu) {
 
     private fun navigateToProducts() {
         val dir = AdminMenuFragmentDirections.actionAdminMenuFragmentToAdminProductsFragment()
+        findNavController().navigate(dir)
+    }
+
+    private fun navigateToReports() {
+        val dir = AdminMenuFragmentDirections.actionAdminMenuFragmentToAdminReportsFragment()
         findNavController().navigate(dir)
     }
 

@@ -11,12 +11,12 @@ class JsonConverterImpl(
 
     override fun <T> serialize(value: T, type: KType): String {
         val serializer: KSerializer<T> = json.serializersModule.serializer(type).cast()
-        return Json.encodeToString(serializer, value)
+        return json.encodeToString(serializer, value)
     }
 
     override fun <T> deserialize(value: String, type: KType): T {
         val serializer: KSerializer<T> = json.serializersModule.serializer(type).cast()
-        return Json.decodeFromString(serializer, value)
+        return json.decodeFromString(serializer, value)
     }
 
     @Suppress("UNCHECKED_CAST")

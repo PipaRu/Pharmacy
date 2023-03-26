@@ -33,6 +33,42 @@
     </fragment>
 
     <fragment
+        android:id="@+id/adminReportsMenuFragment"
+        android:name="com.pharmacy.ui.screen.admin_reports_menu.AdminReportsMenuFragment"
+        android:label="AdminReportsMenuFragment"
+        tools:layout="@layout/fragment_admin_reports_menu">
+
+        <action
+            android:id="@+id/action_adminReportsMenuFragment_to_adminReportsUsersFragment"
+            app:destination="@id/adminReportsUsersFragment" />
+        <action
+            android:id="@+id/action_adminReportsMenuFragment_to_adminReportsCategoriesFragment"
+            app:destination="@id/adminReportsCategoriesFragment" />
+        <action
+            android:id="@+id/action_adminReportsMenuFragment_to_adminReportsProductsFragment"
+            app:destination="@id/adminReportsProductsFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/adminReportsUsersFragment"
+        android:name="com.pharmacy.ui.screen.admin_reports_users.AdminReportsUsersFragment"
+        android:label="AdminReportsUsersFragment"
+        tools:layout="@layout/fragment_admin_reports_users" />
+
+    <fragment
+        android:id="@+id/adminReportsCategoriesFragment"
+        android:name="com.pharmacy.ui.screen.admin_reports_categories.AdminReportsCategoriesFragment"
+        android:label="AdminReportsCategoriesFragment"
+        tools:layout="@layout/fragment_admin_reports_categories" />
+
+    <fragment
+        android:id="@+id/adminReportsProductsFragment"
+        android:name="com.pharmacy.ui.screen.admin_reports_products.AdminReportsProductsFragment"
+        android:label="AdminReportsProductsFragment"
+        tools:layout="@layout/fragment_admin_reports_products" />
+
+    <fragment
         android:id="@+id/adminProductDetailsFragment"
         android:name="com.pharmacy.ui.screen.admin_product_details.AdminProductDetailsFragment"
         android:label="AdminProductDetailsFragment"
@@ -40,7 +76,9 @@
 
         <argument
             android:name="product"
-            app:argType="com.pharmacy.ui.model.ProductItem" />
+            android:defaultValue="@null"
+            app:argType="com.pharmacy.ui.model.ProductItem"
+            app:nullable="true" />
 
     </fragment>
 
@@ -53,6 +91,9 @@
         <action
             android:id="@+id/action_adminMenuFragment_to_adminProductsFragment"
             app:destination="@id/adminProductsFragment" />
+        <action
+            android:id="@+id/action_adminMenuFragment_to_adminReportsFragment"
+            app:destination="@id/adminReportsMenuFragment" />
 
     </fragment>
 

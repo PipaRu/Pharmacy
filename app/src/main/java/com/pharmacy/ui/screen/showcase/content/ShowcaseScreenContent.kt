@@ -33,6 +33,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -131,7 +132,9 @@ private fun TopAppBarContent(
     TopAppBar(
         title = {
             OutlinedTextField(
-                modifier = Modifier.height(36.dp),
+                modifier = Modifier
+                    .height(36.dp)
+                    .fillMaxWidth(),
                 value = query,
                 onValueChange = onQueryChanged,
                 placeholder = { Text(text = stringResource(text_search_placeholder)) },
@@ -301,7 +304,9 @@ private fun ProductCard(
                 fallback = defaultImage
             )
             Text(
-                modifier = Modifier.fillMaxWidth().height(76.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(76.dp),
                 text = product.item.name,
                 style = MaterialTheme.typography.subtitle1,
                 maxLines = 3,
@@ -412,4 +417,21 @@ private fun buildPriceText(
             }
         }
     }
+}
+
+@Preview
+@Composable
+private fun ShowcaseContentPreview() {
+
+    ShowcaseContent(
+        state = ShowcaseViewState(query = ""),
+        onRetryLoading = {  },
+        onQueryChanged = { },
+        onSearchAction = {  },
+        onFilters = {  },
+        onAddToBasket = {},
+        onRemoveFromBasket = {},
+        onProductAction = {},
+        onNextItemIndex = {}
+    )
 }

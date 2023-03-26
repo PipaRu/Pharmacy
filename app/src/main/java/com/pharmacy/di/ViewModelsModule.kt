@@ -4,9 +4,14 @@ import com.pharmacy.ui.dialog.address_picker.AddressPickerViewModel
 import com.pharmacy.ui.dialog.authorization_required.AuthorizationRequiredDialogViewModel
 import com.pharmacy.ui.screen.admin_product_details.AdminProductDetailsViewModel
 import com.pharmacy.ui.screen.admin_products.AdminProductsViewModel
+import com.pharmacy.ui.screen.admin_reports_categories.AdminReportsCategoriesViewModel
+import com.pharmacy.ui.screen.admin_reports_menu.AdminReportsMenuViewModel
+import com.pharmacy.ui.screen.admin_reports_products.AdminReportsProductsViewModel
+import com.pharmacy.ui.screen.admin_reports_users.AdminReportsUsersViewModel
 import com.pharmacy.ui.screen.basket.BasketViewModel
 import com.pharmacy.ui.screen.checkout.CheckoutViewModel
 import com.pharmacy.ui.screen.orders.OrdersViewModel
+import com.pharmacy.ui.screen.product_details.ProductDetailsViewModel
 import com.pharmacy.ui.screen.profile.ProfileViewModel
 import com.pharmacy.ui.screen.showcase.ShowcaseViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -16,6 +21,7 @@ val viewModelsModule = module {
 
     viewModel { parameters ->
         BasketViewModel(
+            productsRepository = get(),
             basketRepository = get(),
             authRepository = get(),
             savedStateHandle = parameters.get()
@@ -47,6 +53,7 @@ val viewModelsModule = module {
     viewModel { parameters ->
         AdminProductsViewModel(
             productsRepository = get(),
+            adminProductsRepository = get(),
             savedStateHandle = parameters.get()
         )
     }
@@ -54,7 +61,34 @@ val viewModelsModule = module {
     viewModel { parameters ->
         AdminProductDetailsViewModel(
             productsRepository = get(),
+            adminProductsRepository = get(),
             savedStateHandle = parameters.get()
+        )
+    }
+
+    viewModel { parameters ->
+        AdminReportsMenuViewModel(
+            savedStateHandle = parameters.get(),
+        )
+    }
+
+    viewModel { parameters ->
+        AdminReportsUsersViewModel(
+            savedStateHandle = parameters.get(),
+        )
+    }
+
+    viewModel { parameters ->
+        AdminReportsCategoriesViewModel(
+            productsRepository = get(),
+            savedStateHandle = parameters.get(),
+        )
+    }
+
+    viewModel { parameters ->
+        AdminReportsProductsViewModel(
+            productsRepository = get(),
+            savedStateHandle = parameters.get(),
         )
     }
 
@@ -84,6 +118,14 @@ val viewModelsModule = module {
     viewModel { parameters ->
         AuthorizationRequiredDialogViewModel(
             authRepository = get(),
+            savedStateHandle = parameters.get(),
+        )
+    }
+
+    viewModel { parameters ->
+        ProductDetailsViewModel(
+            productsRepository = get(),
+            basketRepository = get(),
             savedStateHandle = parameters.get(),
         )
     }

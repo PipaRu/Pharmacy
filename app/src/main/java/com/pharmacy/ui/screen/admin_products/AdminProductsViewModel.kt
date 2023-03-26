@@ -14,6 +14,7 @@ import com.pharmacy.common.mock.MockDelay
 import com.pharmacy.core.crashlytics.Crashlytics
 import com.pharmacy.data.model.ProductFilter
 import com.pharmacy.data.repository.admin_products.AdminProductsRepository
+import com.pharmacy.data.repository.product.ProductsRepository
 import com.pharmacy.ui.model.ProductItem
 import com.pharmacy.ui.model.SelectableItem
 import com.pharmacy.ui.screen.admin_products.model.mvi.AdminProductsSideEffect
@@ -30,7 +31,8 @@ import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 
 class AdminProductsViewModel(
-    private val productsRepository: AdminProductsRepository,
+    private val productsRepository: ProductsRepository,
+    private val adminProductsRepository: AdminProductsRepository,
     savedStateHandle: SavedStateHandle
 ) : ViewModel(), ContainerHost<AdminProductsViewState, AdminProductsSideEffect> {
 
@@ -54,10 +56,17 @@ class AdminProductsViewModel(
     )
 
     init {
-        queryFlow
+
+        val queryFlow1 = queryFlow
             .map(::ProductFilter)
             .flowOn(Dispatchers.Default)
-            .flatMapLatest { filter -> productsRepository.getAllProducts(filter = filter) }
+        val allProductsFlow = productsRepository.allProducts
+        combine(
+            queryFlow1, allProductsFlow
+        ) { filter, allProducts ->
+            adminProductsRepository.getAllProducts(filter = filter)
+        }
+            .flattenConcat()
             .flowOn(Dispatchers.IO)
             .mapElements(ProductItem.Companion::from)
             .mapElements(::SelectableItem)
@@ -107,7 +116,7 @@ class AdminProductsViewModel(
             .map { item -> item.value.convert() }
             .toSet()
         delay(MockDelay.MEDIUM)
-        productsRepository.deleteProducts(forDeletion)
+        adminProductsRepository.deleteProducts(forDeletion)
             .flowOn(Dispatchers.IO)
             .collect()
         val newItems = state.items.filter { item -> !item.isSelected }
@@ -121,6 +130,10 @@ class AdminProductsViewModel(
 
     fun search() = intent {
         queryFlow.execute()
+    }
+
+    fun addProduct() = intent {
+        postSideEffect(AdminProductsSideEffect.NavigateToProductAdding)
     }
 
 }

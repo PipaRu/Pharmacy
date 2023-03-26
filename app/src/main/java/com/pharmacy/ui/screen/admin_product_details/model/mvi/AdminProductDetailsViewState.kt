@@ -10,4 +10,5 @@ data class AdminProductDetailsViewState(
     val isContentEditingLoading: Boolean = false,
     val isContentDeletionLoading: Boolean = false,
     val product: ProductItem = ProductItem.Empty,
+    val isNewProduct: Boolean = false,
 ) : Parcelable

@@ -16,6 +16,7 @@ import com.pharmacy.data.model.BasketBunch
 import com.pharmacy.data.model.UserStatus
 import com.pharmacy.data.repository.auth.AuthRepository
 import com.pharmacy.data.repository.basket.BasketRepository
+import com.pharmacy.data.repository.product.ProductsRepository
 import com.pharmacy.ui.model.BasketBunchItem
 import com.pharmacy.ui.model.SelectableItem
 import com.pharmacy.ui.screen.basket.model.mvi.BasketSideEffect
@@ -32,6 +33,7 @@ import org.orbitmvi.orbit.viewmodel.container
 
 class BasketViewModel(
     private val basketRepository: BasketRepository,
+    private val productsRepository: ProductsRepository,
     private val authRepository: AuthRepository,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel(), ContainerHost<BasketViewState, BasketSideEffect> {
@@ -70,10 +72,24 @@ class BasketViewModel(
                 }
             }
             .flowOn(Dispatchers.Default)
-        val productsFlow = basketRepository.getAll()
+        val basketFlow = basketRepository.getAll()
+        val productsFlow = productsRepository.allProducts
+
+        val basketBunchItemFlow = combine(basketFlow, productsFlow) { basket, products ->
+            basket.mapNotNull { bunch ->
+                val actualProduct = products.find { it.id == bunch.product.id }
+                if (actualProduct == null) {
+                    basketRepository.deleteById(bunch.id).collect()
+                    return@mapNotNull null
+                }
+                bunch.copy(
+                    product = actualProduct
+                )
+            }
+        }
             .flowOn(Dispatchers.IO)
 
-        combine(productsFlow, filterFlow, List<BasketBunch>::filter)
+        combine(basketBunchItemFlow, filterFlow, List<BasketBunch>::filter)
             .flowOn(Dispatchers.Default)
             .onStart { delay(MockDelay.MEDIUM) }
             .mapElements(BasketBunchItem.Companion::from)
@@ -89,7 +105,7 @@ class BasketViewModel(
     }
 
     fun onProductClicked(product: BasketBunchItem) = intent {
-        postSideEffect(BasketSideEffect.ShowContentInDeveloping())
+        postSideEffect(BasketSideEffect.OpenProductDetails(product.product.id))
     }
 
     fun onProductSelected(product: BasketBunchItem, isSelected: Boolean) = intent {

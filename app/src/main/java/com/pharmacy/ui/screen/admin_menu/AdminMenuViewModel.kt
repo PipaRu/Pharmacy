@@ -34,7 +34,7 @@ class AdminMenuViewModel(
     }
 
     fun reports() = intent {
-        postSideEffect(AdminMenuSideEffect.NavigateToProducts)
+        postSideEffect(AdminMenuSideEffect.NavigateToReports)
     }
 
 }

@@ -16,7 +16,7 @@ data class BasketBunchEntity(
     @ColumnInfo(name = "id")
     val id: Int,
     @Embedded(prefix = "product_")
-    val product: ProductEntity,
+    val product: ProductEntity, // TODO: Незачем хранить, достаточно айдишника
     @ColumnInfo(name = "count")
     val count: Int,
 ) : ModelConverter<BasketBunchEntity, BasketBunch> by BasketBunchEntityToBasketBunchConverter {

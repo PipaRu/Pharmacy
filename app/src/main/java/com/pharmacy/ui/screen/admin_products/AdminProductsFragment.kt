@@ -42,6 +42,7 @@ class AdminProductsFragment : AppFragment(R.layout.fragment_admin_products) {
         is AdminProductsSideEffect.NavigateBack -> navigateBack()
         is AdminProductsSideEffect.NavigateToProductDetails -> navigateToProductDetails(effect.productItem)
         is AdminProductsSideEffect.ShowDeleteAllSelectedProductsWarning -> showDeleteAllSelectedProductsWarning()
+        is AdminProductsSideEffect.NavigateToProductAdding -> navigateToProductAdding()
     }
 
     private fun showDeleteAllSelectedProductsWarning() {
@@ -62,6 +63,12 @@ class AdminProductsFragment : AppFragment(R.layout.fragment_admin_products) {
     private fun navigateToProductDetails(product: ProductItem) {
         val dir = AdminProductsFragmentDirections
             .actionAdminProductsFragmentToAdminProductDetailsFragment(product = product)
+        findNavController().navigate(dir)
+    }
+
+    private fun navigateToProductAdding() {
+        val dir = AdminProductsFragmentDirections
+            .actionAdminProductsFragmentToAdminProductDetailsFragment()
         findNavController().navigate(dir)
     }
 

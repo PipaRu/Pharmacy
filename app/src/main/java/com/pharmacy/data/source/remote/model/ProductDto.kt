@@ -18,8 +18,8 @@ data class ProductDto(
     val imageUrl: String? = null,
     @SerialName("description")
     val description: String? = null,
-    @SerialName("category")
-    val category: String? = null,
+    @SerialName("categories")
+    val categories: List<CategoryDto>? = null,
     @SerialName("price")
     val price: PriceDto? = null,
 ) : ModelConverter<ProductDto, Product> by ProductDtoToProductConverter {

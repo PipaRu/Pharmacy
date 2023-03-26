@@ -21,4 +21,8 @@ class AdminProductsRepositoryImpl(
         return remoteDataSource.deleteProducts(products)
     }
 
+    override fun createProduct(): Flow<Product> {
+        return remoteDataSource.createProduct()
+    }
+
 }

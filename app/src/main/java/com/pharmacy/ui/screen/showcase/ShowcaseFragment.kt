@@ -2,6 +2,7 @@ package com.pharmacy.ui.screen.showcase
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.net.toUri
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.pharmacy.AppGraphDirections
@@ -33,6 +34,7 @@ class ShowcaseFragment : AppFragment(R.layout.fragment_showcase) {
     private fun handleSideEffect(effect: ShowcaseSideEffect) = when (effect) {
         is ShowcaseSideEffect.ShowContentInDeveloping -> showContentInDeveloping(effect.contentName)
         is ShowcaseSideEffect.ShowSomethingWentWrong -> showSomethingWentWrong(effect.target)
+        is ShowcaseSideEffect.OpenProductDetails -> navigateToProductDetails(effect.productId)
     }
 
     private fun showContentInDeveloping(contentName: String? = null) {
@@ -42,6 +44,11 @@ class ShowcaseFragment : AppFragment(R.layout.fragment_showcase) {
 
     private fun showSomethingWentWrong(target: String? = null) {
         val dir = AppGraphDirections.actionComposableDialog(SomethingWentWrong(target))
+        findNavController().navigate(dir)
+    }
+
+    private fun navigateToProductDetails(productId: Int) {
+        val dir = "https://pharmacy/product/$productId".toUri() // TODO: DeepLink
         findNavController().navigate(dir)
     }
 

@@ -16,7 +16,7 @@ data class ProductItem(
     val name: String,
     val imageUrl: String,
     val description: String,
-    val category: String,
+    val categories: List<CategoryItem>,
     val price: PriceItem,
 ) : Parcelable, ModelConverter<ProductItem, Product> by ProductItemToProductConverter {
     companion object : ModelTransformer<Product, ProductItem> by ProductItemTransformer {
@@ -25,7 +25,7 @@ data class ProductItem(
             name = String.Empty,
             imageUrl = String.Empty,
             description = String.Empty,
-            category = String.Empty,
+            categories = emptyList(),
             price = PriceItem.Empty
         )
     }

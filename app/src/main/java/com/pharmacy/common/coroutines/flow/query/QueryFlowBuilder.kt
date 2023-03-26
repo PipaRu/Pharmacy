@@ -21,19 +21,22 @@ fun QueryFlow(
 fun QueryFlow(
     debounceMilliseconds: Long,
     coroutineScope: CoroutineScope,
+    initialQuery: String = String.Empty,
 ): QueryFlow = BaseQueryFlow(
     debounce = debounceMilliseconds.toDuration(DurationUnit.MILLISECONDS),
-    coroutineScope = coroutineScope
+    coroutineScope = coroutineScope,
+    initialQuery = initialQuery,
 )
 
 private class BaseQueryFlow(
     debounce: Duration,
     coroutineScope: CoroutineScope,
+    initialQuery: String = String.Empty,
 ) : QueryFlow {
 
-    private val executableQuery: MutableStateFlow<String> = MutableStateFlow(String.Empty)
+    private val executableQuery: MutableStateFlow<String> = MutableStateFlow(initialQuery)
 
-    private val waitingQuery: MutableStateFlow<String> = MutableStateFlow(String.Empty)
+    private val waitingQuery: MutableStateFlow<String> = MutableStateFlow(initialQuery)
 
     init {
         waitingQuery

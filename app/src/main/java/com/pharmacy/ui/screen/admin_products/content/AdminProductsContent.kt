@@ -1,4 +1,8 @@
-@file:OptIn(ExperimentalFoundationApi::class, ExperimentalFoundationApi::class)
+@file:OptIn(
+    ExperimentalFoundationApi::class,
+    ExperimentalLayoutApi::class,
+    ExperimentalMaterialApi::class,
+)
 
 package com.pharmacy.ui.screen.admin_products.content
 
@@ -60,6 +64,7 @@ fun AdminProductsScreenContent(viewModel: AdminProductsViewModel) {
         onDeleteAllSelectedAction = viewModel::deleteAllSelectedAction,
         onProductClick = viewModel::onProductClick,
         onProductSelect = viewModel::onSelectProduct,
+        onAddProductClick = viewModel::addProduct,
     )
 }
 
@@ -73,6 +78,7 @@ private fun AdminProductsContent(
     onDeleteAllSelectedAction: () -> Unit,
     onProductClick: (ProductItem) -> Unit,
     onProductSelect: (ProductItem) -> Unit,
+    onAddProductClick: () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -87,6 +93,16 @@ private fun AdminProductsContent(
                 onSelectionMode = onSelectionMode,
                 onDeleteAllSelectedAction = onDeleteAllSelectedAction
             )
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = onAddProductClick,
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = null,
+                )
+            }
         },
         content = { paddings ->
             Box(
@@ -211,7 +227,12 @@ private fun AllProductsContent(
     LazyVerticalGrid(
         modifier = Modifier,
         columns = GridCells.Fixed(2),
-        contentPadding = PaddingValues(16.dp),
+        contentPadding = PaddingValues(
+            start = 16.dp,
+            top = 16.dp,
+            end = 16.dp,
+            bottom = 96.dp,
+        ),
         verticalArrangement = Arrangement.spacedBy(6.dp),
         horizontalArrangement = Arrangement.spacedBy(6.dp)
     ) {
@@ -404,6 +425,7 @@ private fun AdminProductsContentPreview() {
         onSelectionMode = {},
         onDeleteAllSelectedAction = {},
         onProductClick = {},
-        onProductSelect = {}
+        onProductSelect = {},
+        onAddProductClick = {},
     )
 }
