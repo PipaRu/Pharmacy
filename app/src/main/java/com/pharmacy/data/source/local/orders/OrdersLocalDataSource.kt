@@ -25,6 +25,8 @@ interface OrdersLocalDataSource {
 
     fun getAll(): Flow<List<Order>>
 
+    fun refresh(): Flow<Unit>
+
     fun clear(): Flow<Unit>
 
 }

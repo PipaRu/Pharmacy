@@ -6,12 +6,15 @@ import com.pharmacy.common.extensions.flowOf
 import com.pharmacy.data.model.BasketBunch
 import com.pharmacy.data.source.local.basket.db.dao.BasketDao
 import com.pharmacy.data.source.local.basket.db.enitity.BasketBunchEntity
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import com.pharmacy.di.DiComponent
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.*
+import org.koin.core.component.get
 
-class BasketLocalDataSourceImpl(
-    private val basketDao: BasketDao,
-) : BasketLocalDataSource {
+class BasketLocalDataSourceImpl : BasketLocalDataSource {
+
+    private val basketDao: BasketDao
+        get() = DiComponent.get<BasketDao>()
 
     override fun add(value: BasketBunch): Flow<Unit> {
         return flowOf { BasketBunchEntity.from(value) }
@@ -51,9 +54,22 @@ class BasketLocalDataSourceImpl(
         return flowOf { basketDao.deleteAllById(values) }
     }
 
+    private val refresh = MutableSharedFlow<Unit>(
+        replay = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST,
+    )
+
     override fun getAll(): Flow<List<BasketBunch>> {
-        return basketDao.observe()
-            .map { entities -> entities.map(BasketBunchEntity::convert) }
+        return refresh
+            .onStart { emit(Unit) }
+            .flatMapLatest {
+                basketDao.observe()
+                    .map { entities -> entities.map(BasketBunchEntity::convert) }
+            }
+    }
+
+    override fun refresh(): Flow<Unit> {
+        return flowOf { refresh.emit(Unit) }
     }
 
     override fun clear(): Flow<Unit> {

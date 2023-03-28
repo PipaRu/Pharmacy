@@ -23,6 +23,8 @@ interface BasketLocalDataSource {
 
     fun getAll(): Flow<List<BasketBunch>>
 
+    fun refresh(): Flow<Unit>
+
     fun clear(): Flow<Unit>
 
 }

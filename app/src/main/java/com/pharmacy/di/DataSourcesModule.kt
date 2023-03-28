@@ -16,9 +16,7 @@ import org.koin.dsl.module
 val localDataSourceModule = module {
 
     single<BasketLocalDataSource> {
-        BasketLocalDataSourceImpl(
-            basketDao = get()
-        )
+        BasketLocalDataSourceImpl()
     }
 
     single<AuthLocalDataSource> {
@@ -28,9 +26,7 @@ val localDataSourceModule = module {
     }
 
     single<OrdersLocalDataSource> {
-        OrdersLocalDataSourceImpl(
-            ordersDao = get()
-        )
+        OrdersLocalDataSourceImpl()
     }
 
 }

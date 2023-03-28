@@ -123,7 +123,9 @@ private fun TopAppBarContent(
     TopAppBar(
         title = {
             OutlinedTextField(
-                modifier = Modifier.height(36.dp).fillMaxWidth(),
+                modifier = Modifier
+                    .height(36.dp)
+                    .fillMaxWidth(),
                 value = query,
                 onValueChange = onQueryChanged,
                 placeholder = { Text(text = stringResource(search_placeholder)) },
@@ -233,9 +235,12 @@ private fun BasketActionComponent(
             .filter { element -> element.isSelected }
             .map { element -> element.value }
     }
-    val sumFinal by derivedStateOf { selected.sumOf { element -> element.product.price.finalPrice } }
-    val sumStart by derivedStateOf { selected.sumOf { element -> element.product.price.startPrice } }
-
+    val sumFinal by derivedStateOf {
+        selected.sumOf { element -> element.product.price.finalPrice * element.count }
+    }
+    val sumStart by derivedStateOf {
+        selected.sumOf { element -> element.product.price.startPrice * element.count }
+    }
     Row(
         modifier = Modifier.padding(16.dp)
     ) {

@@ -56,7 +56,7 @@ ext.getAppVersionCode = { ->
 
 ext.appVersion = [
         "code": getAppVersionCode(),
-        "name": "0.1.0",
+        "name": "0.2.1",
 ]
 
 ext.sdkVersions = [

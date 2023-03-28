@@ -97,7 +97,15 @@ class BasketViewModel(
             .onEach { items ->
                 intent {
                     reduce {
-                        state.copy(items = items, isProductsLoading = false)
+                        val currentItems = state.items
+                        val newItems = items.map { selectableItem ->
+                            val isSelected = currentItems
+                                .find { it.value.id == selectableItem.value.id }
+                                ?.isSelected
+                                ?: false
+                            selectableItem.copy(isSelected = isSelected)
+                        }
+                        state.copy(items = newItems, isProductsLoading = false)
                     }
                 }
             }

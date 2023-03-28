@@ -6,12 +6,15 @@ import com.pharmacy.common.extensions.flowOf
 import com.pharmacy.data.model.Order
 import com.pharmacy.data.source.local.orders.db.dao.OrdersDao
 import com.pharmacy.data.source.local.orders.db.enitity.OrderEntity
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import com.pharmacy.di.DiComponent
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.*
+import org.koin.core.component.get
 
-class OrdersLocalDataSourceImpl(
-    private val ordersDao: OrdersDao,
-) : OrdersLocalDataSource {
+class OrdersLocalDataSourceImpl : OrdersLocalDataSource {
+
+    private val ordersDao: OrdersDao
+        get() = DiComponent.get()
 
     override fun get(id: Long): Flow<Order> {
         return flowOf { ordersDao.get(id) }.map(OrderEntity::convert)
@@ -55,9 +58,23 @@ class OrdersLocalDataSourceImpl(
         return flowOf { ordersDao.deleteAllById(values) }
     }
 
+
+    private val refresh = MutableSharedFlow<Unit>(
+        replay = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST,
+    )
+
     override fun getAll(): Flow<List<Order>> {
-        return ordersDao.observe()
-            .map { entities -> entities.map(OrderEntity::convert) }
+        return refresh
+            .onStart { emit(Unit) }
+            .flatMapLatest {
+                ordersDao.observe()
+                    .map { entities -> entities.map(OrderEntity::convert) }
+            }
+    }
+
+    override fun refresh(): Flow<Unit> {
+        return flowOf { refresh.emit(Unit) }
     }
 
     override fun clear(): Flow<Unit> {

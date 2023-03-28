@@ -83,9 +83,9 @@ private fun ScreenContent(
             imageUrl = imageUrl,
             description = description,
             price = product.price.copy(
-                startPrice = startPrice,
-                finalPrice = finalPrice,
-                discount = discount
+                startPrice = startPrice.coerceIn(0.0, 1_000_000.0), // TODO: Костыль
+                finalPrice = finalPrice.coerceIn(0.0, 1_000_000.0),
+                discount = discount.coerceIn(0.0, 100.0),
             )
         )
     }

@@ -344,7 +344,7 @@ private fun ProductContent(
             modifier = Modifier.fillMaxWidth(),
             text = with(product.price) { buildPriceText(startPrice, finalPrice, discount) },
             textAlign = TextAlign.Center,
-            maxLines = 1
+            maxLines = 2,
         )
     }
 }
@@ -380,7 +380,7 @@ private fun buildPriceText(
                     fontWeight = FontWeight.Medium
                 )
             ) {
-                append(PercentFormatter.format(discount))
+                append("-${PercentFormatter.format(discount)}")
             }
         }
     }
