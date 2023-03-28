@@ -19,3 +19,6 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep public class com.pharmacy.data.source.remote.model.*
+-keep public class com.pharmacy.data.source.local.basket.db.enitity.*

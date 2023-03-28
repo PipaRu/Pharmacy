@@ -2,7 +2,6 @@ package com.pharmacy.ui.screen.profile
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.pharmacy.common.converter.model.convert
 import com.pharmacy.common.converter.model.from
 import com.pharmacy.common.formatter.PhoneFormatter
@@ -19,13 +18,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.orbitmvi.orbit.Container
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
+import org.orbitmvi.orbit.syntax.simple.repeatOnSubscription
 import org.orbitmvi.orbit.viewmodel.container
 
 class ProfileViewModel(
@@ -45,14 +44,18 @@ class ProfileViewModel(
     )
 
     init {
-        authRepository.userStatus.onEach { userStatus ->
-            intent {
-                val status = UserStatusItem.from(userStatus)
-                reduce { state.copy(status = status) }
+        intent {
+            repeatOnSubscription {
+                authRepository.userStatus.onEach { userStatus ->
+                    val status = UserStatusItem.from(userStatus)
+                    reduce { state.copy(status = status) }
+                    postSideEffect(ProfileSideEffect.DropNavigation)
+                }
+                    .flowOn(Dispatchers.Default)
+                    .collect()
             }
         }
-            .flowOn(Dispatchers.IO)
-            .launchIn(viewModelScope)
+
     }
 
     fun login(name: String, phone: PhoneNumberItem) = intent {

@@ -38,6 +38,12 @@ class ProfileFragment : AppFragment(R.layout.fragment_profile) {
         is ProfileSideEffect.NavigateToOrders -> navigateToOrders()
         is ProfileSideEffect.ShowContentInDeveloping -> showContentInDeveloping(effect.contentName)
         is ProfileSideEffect.ShowSomethingWentWrong -> showSomethingWentWrong(effect.target)
+        is ProfileSideEffect.DropNavigation -> clearBackStack()
+    }
+
+    private fun clearBackStack() {
+        findNavController().clearBackStack(R.id.basket_graph)
+        //findNavController().clearBackStack(R.id.showcase_graph)
     }
 
     private fun navigateToAdministration() {

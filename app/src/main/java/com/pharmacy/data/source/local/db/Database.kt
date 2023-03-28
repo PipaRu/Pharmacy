@@ -38,12 +38,12 @@ object DatabaseFactory {
     fun create(
         name: String = DATABASE_NAME_ANON,
     ): AppDatabase {
-        val converters = listOf<Any>(
-            CategoryEntityListConverter(
-                jsonConverter = DiComponent.get(),
-            )
-        )
         return databaseMap.getOrPut(name) {
+            val converters = listOf<Any>(
+                CategoryEntityListConverter(
+                    jsonConverter = DiComponent.get(),
+                )
+            )
             Room.databaseBuilder(
                 DiComponent.get(),
                 AppDatabase::class.java,

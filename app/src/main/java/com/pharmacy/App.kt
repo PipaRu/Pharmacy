@@ -7,8 +7,12 @@ import com.pharmacy.core.component.Component.Companion.initializeComponents
 import com.pharmacy.core.crashlytics.CrashlyticsComponent
 import com.pharmacy.core.logger.LoggerComponent
 import com.pharmacy.core.theme.ThemeComponent
+import com.pharmacy.data.repository.auth.AuthRepository
 import com.pharmacy.di.DiComponent
 import com.pharmacy.ui.activity.CrashActivity
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.launchIn
+import org.koin.core.component.get
 
 class App : Application() {
 
@@ -23,6 +27,9 @@ class App : Application() {
             CrashlyticsComponent,
             ThemeComponent
         )
+
+        DiComponent.get<AuthRepository>().userStatus
+            .launchIn(GlobalScope)
 
         registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
             override fun onActivityCreated(p0: Activity, p1: Bundle?) {

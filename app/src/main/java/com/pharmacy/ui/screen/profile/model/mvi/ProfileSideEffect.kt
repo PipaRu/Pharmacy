@@ -6,4 +6,5 @@ sealed class ProfileSideEffect {
     object NavigateToOrders : ProfileSideEffect()
     object NavigateToAdministration : ProfileSideEffect()
     object SelectAddress : ProfileSideEffect()
+    object DropNavigation : ProfileSideEffect()
 }

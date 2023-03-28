@@ -17,8 +17,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -45,9 +44,10 @@ import com.pharmacy.ui.screen.showcase.ShowcaseViewModel
 import com.pharmacy.ui.screen.showcase.model.ShowcaseItem
 import com.pharmacy.ui.screen.showcase.model.mvi.ShowcaseViewState
 import com.valentinilk.shimmer.shimmer
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 import org.orbitmvi.orbit.compose.collectAsState
 import com.pharmacy.R.string.content_showcase_action_product_add_to_basket as action_product_add_to_basket
-import com.pharmacy.R.string.content_showcase_action_product_remove_from_basket as action_product_remove_from_basket
 import com.pharmacy.R.string.content_showcase_description_filter as description_filter
 import com.pharmacy.R.string.content_showcase_description_product_image as description_product_image
 import com.pharmacy.R.string.content_showcase_text_search_placeholder as text_search_placeholder
@@ -56,7 +56,7 @@ import com.pharmacy.R.string.content_showcase_text_search_placeholder as text_se
 fun ShowcaseScreenContent(viewModel: ShowcaseViewModel) {
     val state: ShowcaseViewState by viewModel.collectAsState()
 
-    ShowcaseContent(
+    ShowcaseScreenContent(
         state = state,
         onRetryLoading = viewModel::retryLoading,
         onQueryChanged = viewModel::query,
@@ -70,12 +70,12 @@ fun ShowcaseScreenContent(viewModel: ShowcaseViewModel) {
 }
 
 @Composable
-private fun ShowcaseContent(
+private fun ShowcaseScreenContent(
     state: ShowcaseViewState,
-    onRetryLoading: () -> Unit,
     onQueryChanged: (String) -> Unit,
     onSearchAction: () -> Unit,
     onFilters: () -> Unit,
+    onRetryLoading: () -> Unit,
     onAddToBasket: (ShowcaseItem.Product) -> Unit,
     onRemoveFromBasket: (ShowcaseItem.Product) -> Unit,
     onProductAction: (ShowcaseItem.Product) -> Unit,
@@ -96,27 +96,14 @@ private fun ShowcaseContent(
                     .fillMaxSize()
                     .padding(paddings)
             ) {
-                when {
-                    state.isProductsLoading -> {
-                        AllProductsLoadingContent()
-                    }
-                    state.productsLoadingError != null -> {
-                        AllProductsErrorContent(
-                            error = state.productsLoadingError,
-                            onRetry = onRetryLoading
-                        )
-                    }
-                    else -> {
-                        AllProductsContent(
-                            items = state.items,
-                            onRetry = onRetryLoading,
-                            onAddToBasket = onAddToBasket,
-                            onRemoveFromBasket = onRemoveFromBasket,
-                            onProductAction = onProductAction,
-                            onNextItemIndex = onNextItemIndex
-                        )
-                    }
-                }
+                MainContent(
+                    state = state,
+                    onRetryLoading = onRetryLoading,
+                    onAddToBasket = onAddToBasket,
+                    onRemoveFromBasket = onRemoveFromBasket,
+                    onProductAction = onProductAction,
+                    onNextItemIndex = onNextItemIndex,
+                )
             }
         }
     )
@@ -170,8 +157,41 @@ private fun TopAppBarContent(
 }
 
 @Composable
+private fun MainContent(
+    state: ShowcaseViewState,
+    onRetryLoading: () -> Unit,
+    onAddToBasket: (ShowcaseItem.Product) -> Unit,
+    onRemoveFromBasket: (ShowcaseItem.Product) -> Unit,
+    onProductAction: (ShowcaseItem.Product) -> Unit,
+    onNextItemIndex: (Int) -> Unit,
+) {
+    when {
+        state.isProductsLoading -> {
+            LoadingContent()
+        }
+        state.productsLoadingError != null -> {
+            ErrorContent(
+                error = state.productsLoadingError,
+                onRetry = onRetryLoading
+            )
+        }
+        else -> {
+            val items by remember(state) { derivedStateOf { state.items.toImmutableList() } }
+            AllProductsContent(
+                items = items,
+                onRetry = onRetryLoading,
+                onAddToBasket = onAddToBasket,
+                onRemoveFromBasket = onRemoveFromBasket,
+                onProductAction = onProductAction,
+                onNextItemIndex = onNextItemIndex
+            )
+        }
+    }
+}
+
+@Composable
 private fun AllProductsContent(
-    items: List<ShowcaseItem>,
+    items: ImmutableList<ShowcaseItem>,
     onRetry: () -> Unit,
     onAddToBasket: (ShowcaseItem.Product) -> Unit,
     onRemoveFromBasket: (ShowcaseItem.Product) -> Unit,
@@ -179,7 +199,7 @@ private fun AllProductsContent(
     onNextItemIndex: (Int) -> Unit,
 ) {
     LazyVerticalGrid(
-        modifier = Modifier,
+        modifier = Modifier.fillMaxSize(),
         columns = GridCells.Fixed(2),
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(6.dp),
@@ -203,12 +223,22 @@ private fun AllProductsContent(
             onNextItemIndex.invoke(index)
             when (item) {
                 is ShowcaseItem.Product -> {
+                    val onActionF = remember(item) {
+                        { onProductAction.invoke(item) }
+                    }
+                    val onAddToBasketF = remember(item) {
+                        { onAddToBasket.invoke(item) }
+                    }
+                    val onRemoveFromBasketF = remember(item) {
+                        { onRemoveFromBasket.invoke(item) }
+                    }
                     ProductCard(
-                        modifier = Modifier.animateItemPlacement(),
+                        modifier = Modifier
+                            .animateItemPlacement(),
                         product = item,
-                        onAction = { onProductAction.invoke(item) },
-                        onAddToBasket = { onAddToBasket.invoke(item) },
-                        onRemoveFromBasket = { onRemoveFromBasket.invoke(item) },
+                        onAction = onActionF,
+                        onAddToBasket = onAddToBasketF,
+                        onRemoveFromBasket = onRemoveFromBasketF,
                     )
                 }
                 is ShowcaseItem.Error -> {
@@ -251,7 +281,7 @@ private fun AllProductsContent(
 }
 
 @Composable
-private fun AllProductsErrorContent(
+private fun ErrorContent(
     error: Throwable,
     onRetry: () -> Unit,
 ) {
@@ -267,10 +297,10 @@ private fun AllProductsErrorContent(
 }
 
 @Composable
-private fun AllProductsLoadingContent() {
+private fun LoadingContent() {
     Box(
         modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         CircularProgressIndicator()
     }
@@ -293,15 +323,16 @@ private fun ProductCard(
             modifier = Modifier.padding(horizontal = 4.dp, vertical = 8.dp)
         ) {
             val defaultImage = rememberVectorPainter(Icons.Default.Image)
+            val image by remember(product) { mutableStateOf(product.item.imageUrl) }
             AsyncImage(
                 modifier = Modifier
                     .size(72.dp)
                     .align(Alignment.CenterHorizontally),
-                model = product.item.imageUrl,
+                model = image,
                 contentDescription = stringResource(description_product_image),
                 placeholder = defaultImage,
                 error = defaultImage,
-                fallback = defaultImage
+                fallback = defaultImage,
             )
             Text(
                 modifier = Modifier
@@ -360,7 +391,7 @@ private fun ProductCard(
                             .fillMaxWidth(0.7f)
                             .height(36.dp),
                         contentPadding = PaddingValues(horizontal = 4.dp, vertical = 4.dp),
-                        onClick = if (product.inBasket) onRemoveFromBasket else onAddToBasket
+                        onClick = onAddToBasket
                     ) {
                         if (product.isBasketLoading) {
                             CircularProgressIndicator(
@@ -368,12 +399,7 @@ private fun ProductCard(
                                 color = MaterialTheme.colors.onPrimary
                             )
                         } else {
-                            val text = if (product.inBasket) {
-                                action_product_remove_from_basket
-                            } else {
-                                action_product_add_to_basket
-                            }
-                            Text(text = stringResource(text))
+                            Text(text = stringResource(action_product_add_to_basket))
                         }
                     }
                 }
@@ -423,7 +449,7 @@ private fun buildPriceText(
 @Composable
 private fun ShowcaseContentPreview() {
 
-    ShowcaseContent(
+    ShowcaseScreenContent(
         state = ShowcaseViewState(query = ""),
         onRetryLoading = {  },
         onQueryChanged = { },

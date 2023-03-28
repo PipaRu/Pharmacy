@@ -145,6 +145,8 @@ dependencies {
 
     implementation "com.airbnb.android:lottie-compose:5.2.0"
 
+    implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5")
+
     testImplementation "junit:junit:$versions.junit"
     androidTestImplementation "androidx.test.ext:junit:$versions.android_junit"
     androidTestImplementation "androidx.test.espresso:espresso-core:$versions.android_espresso"
